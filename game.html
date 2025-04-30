@@ -76,7 +76,19 @@
 <div id="hallOfFame" style="margin-top:30px;"></div>
 
 <script>
-// JavaScript code omitted for brevity — it would be inserted here
+window.onload = function() {
+  const playerName = localStorage.getItem("playerName") || "Player";
+  const difficulty = localStorage.getItem("difficulty") || "easy";
+
+  // Display the player's name in the UI
+  document.getElementById("playerNameDisplay").textContent = playerName;
+
+  // Check if required data is missing
+  if (!localStorage.getItem("playerName") || !localStorage.getItem("difficulty")) {
+    console.error("Player data is missing. Redirecting to index.html...");
+    window.location.href = "index.html";
+  }
+};
 </script>
 
 </body>
