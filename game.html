@@ -76,19 +76,89 @@
 <div id="hallOfFame" style="margin-top:30px;"></div>
 
 <script>
-window.onload = function() {
-  const playerName = localStorage.getItem("playerName") || "Player";
-  const difficulty = localStorage.getItem("difficulty") || "easy";
-
-  // Display the player's name in the UI
-  document.getElementById("playerNameDisplay").textContent = playerName;
-
-  // Check if required data is missing
-  if (!localStorage.getItem("playerName") || !localStorage.getItem("difficulty")) {
-    console.error("Player data is missing. Redirecting to index.html...");
-    window.location.href = "index.html";
+  const questions = [
+  {
+    question: "ما هو ناتج 2 + 2؟",
+    options: ["3", "4", "5"],
+    answer: "4"
+  },
+  {
+    question: "ما هو عاصمة الأردن؟",
+    options: ["عمان", "بيروت", "دمشق"],
+    answer: "عمان"
+  },
+  {
+    question: "ما هو لون السماء؟",
+    options: ["أزرق", "أخضر", "أحمر"],
+    answer: "أزرق"
   }
-};
+];
+  let currentQuestionIndex = 0;
+
+function nextQuestion() {
+  const questionElement = document.getElementById("question");
+  const optionsElement = document.getElementById("options");
+
+  // عرض السؤال الحالي
+  const currentQuestion = questions[currentQuestionIndex];
+  questionElement.textContent = currentQuestion.question;
+
+  // عرض الخيارات
+  optionsElement.innerHTML = ""; // تفريغ الخيارات السابقة
+  currentQuestion.options.forEach(option => {
+    const button = document.createElement("button");
+    button.textContent = option;
+    button.onclick = () => checkAnswer(option);
+    optionsElement.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedOption) {
+  const currentQuestion = questions[currentQuestionIndex];
+  if (selectedOption === currentQuestion.answer) {
+    alert("إجابة صحيحة!");
+  } else {
+    alert("إجابة خاطئة!");
+  }
+
+  // الانتقال إلى السؤال التالي
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    nextQuestion();
+  } else {
+    alert("انتهت اللعبة!");
+  }
+}
+  window.onload = function() {
+    const playerName = localStorage.getItem("playerName") || "Player";
+    const difficulty = localStorage.getItem("difficulty") || "easy";
+    const questions = [
+  {
+    question: "ما هو ناتج 2 + 2؟",
+    options: ["3", "4", "5"],
+    answer: "4"
+  },
+  {
+    question: "ما هو عاصمة الأردن؟",
+    options: ["عمان", "بيروت", "دمشق"],
+    answer: "عمان"
+  },
+  {
+    question: "ما هو لون السماء؟",
+    options: ["أزرق", "أخضر", "أحمر"],
+    answer: "أزرق"
+  }
+];
+    document.getElementById("playerNameDisplay").textContent = playerName;
+
+    if (!localStorage.getItem("playerName") || !localStorage.getItem("difficulty")) {
+      console.error("Player data is missing. Redirecting to index.html...");
+      window.location.href = "index.html";
+    }
+
+    // استدعاء السؤال الأول
+    nextQuestion();
+  };
 </script>
 
 </body>
