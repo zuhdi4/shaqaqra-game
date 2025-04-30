@@ -3,9 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <title>لعبة الشقاقرة الصغار</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #fff8dc;
+      text-align: center;
+      padding: 50px;
+    }
+    .container {
+      background-color: #fce4ec;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    input, select, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>مرحبا بك في لعبة الشقاقرة الصغار</h1>
-  <!-- سيتم إدراج نموذج الاسم واختيار المستوى هنا -->
+  <div class="container">
+    <h1>لعبة الشقاقرة الصغار</h1>
+    <form onsubmit="startGame(event)">
+      <div>
+        <label>أدخل اسمك:</label><br>
+        <input type="text" id="playerName" required>
+      </div>
+      <div>
+        <label>اختر مستوى اللعب:</label><br>
+        <select id="difficulty">
+          <option value="easy">سهل (جمع وطرح)</option>
+          <option value="hard">صعب (جميع العمليات)</option>
+        </select>
+      </div>
+      <button type="submit">ابدأ اللعب</button>
+    </form>
+  </div>
+
+  <script>
+    function startGame(e) {
+      e.preventDefault();
+      const name = document.getElementById('playerName').value;
+      const level = document.getElementById('difficulty').value;
+      localStorage.setItem("playerName", name);
+      localStorage.setItem("difficulty", level);
+      window.location.href = "game.html";
+    }
+  </script>
 </body>
 </html>
