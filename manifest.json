@@ -1,0 +1,9 @@
+{
+  "name": "لعبة الشقاقرة الصغار",
+  "short_name": "شقاقرة",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f06292",
+  "icons": []
+}
